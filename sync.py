@@ -10,7 +10,7 @@ if sys.version_info[0] != 3:
 
 def main():
     filenames = ["/home/dipack/.zshrc", "/home/dipack/.bashrc", "/home/dipack/.vimrc"]
-    destination = "/home/dipack/Dotfiles/"
+    destination = os.getcwd()
 
     for tempFile in filenames:
         call(["cp", "-Rv", tempFile, destination])
