@@ -4,7 +4,7 @@ declare -a filenames=("/home/dipack/.zshrc" "/home/dipack/.bashrc" "/home/dipack
 for addFile in "${filenames[@]}"
 do 
     echo "Adding ${addFile} to git repo"
-    currFileName=${addFile//\~\/} 
+    currFileName=${addFile//\/home\/dipack\/} 
     cp -Rv $addFile /home/dipack/Dotfiles
     echo "$currFileName"
     #git add "$currFileName" 
