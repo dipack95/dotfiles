@@ -38,10 +38,12 @@ export PATH="/home/dipack/anaconda3/bin:$PATH"
 # End of Environment Variables
 
 # Aliases
+alias rm='$HOME/scripts/trashit.sh'
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias uu="sudo apt-get update && sudo apt-get upgrade"
 alias ppu="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U"
 alias pp3u="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip3 install -U"
+alias rmrecent='rm $HOME/.local/share/recently-used.xbel; touch $HOME/.local/share/recently-used.xbel'
 # End of Aliases	
 
 # Kill and Killall completion
@@ -106,4 +108,43 @@ function zurl {
 	if [[ $data =~ '"id": "(http://goo.gl/[[:alnum:]]+)"' ]]; then
 		print $match
 	fi
+}
+
+dot_progress() {
+    # Fancy progress function from Landley's Aboriginal Linux.
+    # Useful for long rm, tar and such.
+    # Usage:
+    #     rm -rfv /foo | dot_progress
+    local i='0'
+    local line=''z
+ 
+    while read line; do
+        i="$((i+1))"
+        if [ "${i}" = '25' ]; then
+            printf '.'
+            i='0'
+        fi
+    done
+    printf '\n'
+}
+ 
+function extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xvjf $1 | dot_progress     ;;
+            *.tar.gz)    tar xvzf $1 | dot_progress     ;;
+            *.bz2)       bunzip2 $1 | dot_progress      ;;
+            *.rar)       unrar x $1 | dot_progress      ;;
+            *.gz)        gunzip $1 | dot_progress       ;;
+            *.tar)       tar xvf $1 | dot_progress      ;;
+            *.tbz2)      tar xvjf $1 | dot_progress    ;;
+            *.tgz)       tar xvzf $1 | dot_progress     ;;
+            *.zip)       unzip $1 | dot_progress        ;;
+            *.Z)         uncompress $1 | dot_progress   ;;
+            *.7z)        7z x $1 | dot_progress         ;;
+            *)           echo "'$1' cannot be extracted via >extract<" ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
 }

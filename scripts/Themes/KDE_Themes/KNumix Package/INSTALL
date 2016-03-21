@@ -1,0 +1,6 @@
+ Copy folders in GTK Themes direcotiry to /usr/share/themes
+Copy folder in Cusor directory to /usr/share/icons
+Copy folders in Decoration directory to /home/ehsan/.kde4/share/apps/aurorae/themes/
+Color Scheme and QtCurve theme are in the QtCurve-Color Scheme directory
+
+Enjoy ;)
