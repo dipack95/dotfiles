@@ -34,11 +34,11 @@ bindkey '\e[4~' end-of-line
 export EDITOR="vim"
 ## added by Anaconda3 2.5.0 installer
 export PATH="/home/dipack/anaconda3/bin:$PATH"
-
+export PATH="$PATH:$HOME/bin"
+export PROSODIZER_SOUND_FILES="/home/dipack/College/Fourth_Year/Final_Year_Project/sounds"
 # End of Environment Variables
 
 # Aliases
-alias rm='$HOME/scripts/trashit.sh'
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias uu="sudo apt-get update && sudo apt-get upgrade"
 alias ppu="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U"

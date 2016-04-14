@@ -7,7 +7,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " Plugins
 Plugin 'davidhalter/jedi-vim'
-Plugin 'valloric/youcompleteme'
+Plugin 'Valloric/YouCompleteMe'
 " End Plugins
 call vundle#end()
 filetype plugin indent on
