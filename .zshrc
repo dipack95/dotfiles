@@ -19,11 +19,11 @@ plugins=(git)
 
 # User Files
 
-source $HOME/zsh_conf/keybind.zsh
-source $HOME/zsh_conf/completions.zsh
-source $HOME/zsh_conf/functions.zsh
 source $HOME/zsh_conf/env.zsh
-source $HOME/zsh_conf/aliases.zsh
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
+source $ZSH_CONF_HOME/keybind.zsh
+source $ZSH_CONF_HOME/completions.zsh
+source $ZSH_CONF_HOME/functions.zsh
+source $ZSH_CONF_HOME/aliases.zsh
 
 # End of User Files
