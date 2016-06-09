@@ -22,7 +22,6 @@ plugins=(git)
 source $HOME/zsh_conf/env.zsh
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 source $ZSH_CONF_HOME/keybind.zsh
-source $ZSH_CONF_HOME/execprog.zsh
 source $ZSH_CONF_HOME/completions.zsh
 source $ZSH_CONF_HOME/functions.zsh
 source $ZSH_CONF_HOME/aliases.zsh
