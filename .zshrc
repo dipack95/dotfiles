@@ -19,7 +19,7 @@ plugins=(git-no-alias)
 
 # User Files
 
-source $HOME/zsh_conf/env.zsh
+source $HOME/zshfiles/env.zsh
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 source $ZSH_CONF_HOME/keybind.zsh
 source $ZSH_CONF_HOME/completions.zsh
