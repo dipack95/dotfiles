@@ -1,16 +1,8 @@
-filetype off
-" Vundle stuff
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 " Plugins
-Plugin 'davidhalter/jedi-vim'
-Plugin 'Valloric/YouCompleteMe'
-" End Plugins
-call vundle#end()
-filetype plugin indent on
-
+Plug 'valloric/youcompleteme'
+Plug 'davidhalter/jedi-vim'
+call plug#end()
 set nocompatible
 set hidden
 set backspace=indent,eol,start
