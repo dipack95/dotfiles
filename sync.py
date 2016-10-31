@@ -12,6 +12,7 @@ def main():
     filenames = ["/home/dipack/.zshrc", 
     			"/home/dipack/.bashrc", 
     			"/home/dipack/.vimrc", 
+    			"/home/dipack/scripts", 
     			"/home/dipack/zshfiles"] 
     destination = os.getcwd() + "/"
 
