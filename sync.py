@@ -8,6 +8,26 @@ if sys.version_info[0] != 3:
         print("This script requires Python version 3.x")
         sys.exit(1)
 
+def addToRepo(directory, filenames):
+    currDir = os.getcwd()
+    os.chdir(directory)
+    for tempFile in filenames:
+        call(["cp", "-Rv", tempFile, directory])
+        toBeAdded = tempFile.split('/')[-1]
+        call(["git", "add", directory + "/" + toBeAdded])
+    return 1
+
+def cleanUp(directory, filenames):
+    currDir = os.getcwd()
+    os.chdir(directory)
+    for tempFile in filenames:
+        toBeDeleted = tempFile.split('/')[-1]
+        if call(["rm", "-rf", toBeDeleted]):
+            os.chdir(currDir)
+            return 0
+    os.chdir(currDir)
+    return 1
+
 def main():
     filenames = ["/home/dipack/.zshrc", 
    			"/home/dipack/zshfiles",
@@ -15,18 +35,14 @@ def main():
                         "/home/dipack/vimfiles",
     			"/home/dipack/.bashrc", 
     			"/home/dipack/scripts"] 
-    destination = os.getcwd() + "/"
-    for tempFile in filenames:
-        call(["cp", "-Rv", tempFile, destination])
-        addFilename = tempFile.split('/')[-1]
-        call(["git", "add", destination + addFilename])
+    addToRepo(os.getcwd(), filenames)
     call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
     call(["git", "push", "-u", "--quiet", "origin", "master"])
     print("Synced with remote repository")
-    for tempFile in filenames:
-        deleteFilename = tempFile.split('/')[-1]
-        call(["rm", "-rf", deleteFilename])
-    print("Cleaned up!")
+    if cleanUp(destination, filenames):
+        print("Cleaned up!")
+    else:
+        print("Failed to clean up!")
     return
 
 if __name__ == '__main__':
