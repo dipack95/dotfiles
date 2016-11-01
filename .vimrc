@@ -13,6 +13,10 @@ set nocompatible
 set hidden
 set backspace=indent,eol,start
 
+" Setting terminal colors to 256
+" set t_Co=256
+" Setting colorscheme
+colorscheme badwolf 
 
 " Set line numbering
 set nu
@@ -32,9 +36,6 @@ set incsearch
 " Highlight search results
 set hlsearch
 
-" Setting colorscheme
-colorscheme 256-grayvim
-
 " Start NerdTree on Startup
 " autocmd vimenter * NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -42,7 +43,7 @@ map <C-n> :NERDTreeToggle<CR>
 " Airline and Airline Theme Config
 set laststatus=2
 set ttimeoutlen=50
-let g:airline_theme='cool'
+let g:airline_theme='badwolf'
 
 " Gvimrc settings
 if has("gui_running")

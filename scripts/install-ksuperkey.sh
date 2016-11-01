@@ -1,1 +1,0 @@
-sudo apt-get install git gcc make libx11-dev libxtst-dev pkg-config -y && git clone https://github.com/hanschen/ksuperkey.git && cd ksuperkey && make && sudo mv ksuperkey /usr/bin/ksuperkey && cd ~ && rm -rf ksuperkey && ksuperkey
