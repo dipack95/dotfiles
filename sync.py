@@ -15,7 +15,7 @@ def main():
                         "/home/dipack/vimfiles",
     			"/home/dipack/.bashrc", 
     			"/home/dipack/scripts"] 
-    destination = os.getcwd() + "/"
+    destination = os.getcwd() + "/dotfiles/"
     for tempFile in filenames:
         call(["cp", "-Rv", tempFile, destination])
         addFilename = tempFile.split('/')[-1]
@@ -23,7 +23,10 @@ def main():
     call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
     call(["git", "push", "-u", "--quiet", "origin", "master"])
     print("Synced with remote repository")
-
+    for tempFile in filenames:
+        deleteFilename = tempFile.split('/')[-1]
+        call(["rm", "-rf", deleteFilename])
+    print("Cleaned up!")
     return
 
 if __name__ == '__main__':
