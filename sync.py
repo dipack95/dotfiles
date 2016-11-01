@@ -15,7 +15,7 @@ def main():
                         "/home/dipack/vimfiles",
     			"/home/dipack/.bashrc", 
     			"/home/dipack/scripts"] 
-    destination = os.getcwd() + "/dotfiles/"
+    destination = os.getcwd() + "/"
     for tempFile in filenames:
         call(["cp", "-Rv", tempFile, destination])
         addFilename = tempFile.split('/')[-1]
