@@ -39,7 +39,7 @@ def main():
     call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
     call(["git", "push", "-u", "--quiet", "origin", "master"])
     print("Synced with remote repository")
-    if cleanUp(destination, filenames):
+    if cleanUp(os.getcwd(), filenames):
         print("Cleaned up!")
     else:
         print("Failed to clean up!")
