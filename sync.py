@@ -35,14 +35,14 @@ def main():
                         "/home/dipack/vimfiles",
     			"/home/dipack/.bashrc", 
     			"/home/dipack/scripts"] 
-    addToRepo(os.getcwd(), filenames)
-    call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
-    call(["git", "push", "-u", "--quiet", "origin", "master"])
-    print("Synced with remote repository")
     if cleanUp(os.getcwd(), filenames):
         print("Cleaned up!")
     else:
         print("Failed to clean up!")
+    addToRepo(os.getcwd(), filenames)
+    call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
+    call(["git", "push", "-u", "--quiet", "origin", "master"])
+    print("Synced with remote repository")
     return
 
 if __name__ == '__main__':
