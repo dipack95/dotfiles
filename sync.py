@@ -10,10 +10,11 @@ if sys.version_info[0] != 3:
 
 def main():
     filenames = ["/home/dipack/.zshrc", 
-    			"/home/dipack/.bashrc", 
+    			"/home/dipack/zshfiles",
     			"/home/dipack/.vimrc", 
-    			"/home/dipack/scripts", 
-    			"/home/dipack/zshfiles"] 
+                        "/home/dipack/vimfiles",
+    			"/home/dipack/.bashrc", 
+    			"/home/dipack/scripts"] 
     destination = os.getcwd() + "/"
 
     for tempFile in filenames:
