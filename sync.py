@@ -21,7 +21,7 @@ def main():
         addFilename = tempFile.split('/')[-1]
         call(["git", "add", destination + addFilename])
     call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
-    call(["git", "push", "-u", "origin", "master"])
+    call(["git", "push", "-u", "--quiet", "origin", "master"])
     print("Synced with remote repository")
 
     return
