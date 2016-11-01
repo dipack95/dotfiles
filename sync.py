@@ -17,9 +17,12 @@ def main():
     			"/home/dipack/scripts"] 
     destination = os.getcwd() + "/"
     for tempFile in filenames:
+        print("Copying these files;")
+        print("--------------------")
         call(["cp", "-Rv", tempFile, destination])
         addFilename = tempFile.split('/')[-1]
         call(["git", "add", destination + addFilename])
+    print("--------------------")
     call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
     call(["git", "push", "-u", "origin", "master"])
     print("Synced with remote repository")
