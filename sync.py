@@ -10,20 +10,18 @@ if sys.version_info[0] != 3:
 
 def main():
     filenames = ["/home/dipack/.zshrc", 
-    			"/home/dipack/zshfiles",
+   			"/home/dipack/zshfiles",
     			"/home/dipack/.vimrc", 
                         "/home/dipack/vimfiles",
     			"/home/dipack/.bashrc", 
     			"/home/dipack/scripts"] 
     destination = os.getcwd() + "/"
-
     for tempFile in filenames:
         call(["cp", "-Rv", tempFile, destination])
         addFilename = tempFile.split('/')[-1]
         call(["git", "add", destination + addFilename])
     call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
     call(["git", "push", "-u", "origin", "master"])
-    
     print("Synced with remote repository")
 
     return
