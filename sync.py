@@ -39,9 +39,9 @@ def main():
             "$HOME/misc-fixes"]
     filenames = [os.path.expandvars(tempFile) for tempFile in filenames]
     if cleanUp(os.getcwd(), filenames):
-        print("Cleaned up!")
+        print("Cleaned up.")
     else:
-        print("Failed to clean up!")
+        print("Failed to clean up.")
         return 0
     if (addToRepo(os.getcwd(), filenames)):
         print("Copied from source location to current directory, and added to git repo.")
