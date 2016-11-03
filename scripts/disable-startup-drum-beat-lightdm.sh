@@ -1,2 +1,0 @@
-sudo sh -c "echo '[com.canonical.unity-greeter]' >> /usr/share/glib-2.0/schemas/50_unity-greeter.gschema.override; echo 'play-ready-sound = false' >> /usr/share/glib-2.0/schemas/50_unity-greeter.gschema.override"
-sudo glib-compile-schemas /usr/share/glib-2.0/schemas/

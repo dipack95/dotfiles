@@ -29,12 +29,14 @@ def cleanUp(directory, filenames):
     return 1
 
 def main():
-    filenames = ["/home/dipack/.zshrc", 
-   			"/home/dipack/zshfiles",
-    			"/home/dipack/.vimrc", 
-                        "/home/dipack/vimfiles",
-    			"/home/dipack/.bashrc", 
-    			"/home/dipack/scripts"] 
+    filenames = ["$HOME/.zshrc", 
+   			"$HOME/zshfiles",
+    			"$HOME/.vimrc", 
+                        "$HOME/vimfiles",
+    			"$HOME/.bashrc", 
+    			"$HOME/scripts",
+                        "$HOME/misc-fixes"]
+    filenames = os.path.expandvars(filenames)
     if cleanUp(os.getcwd(), filenames):
         print("Cleaned up!")
     else:
