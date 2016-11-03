@@ -42,11 +42,16 @@ def main():
         print("Cleaned up!")
     else:
         print("Failed to clean up!")
-    addToRepo(os.getcwd(), filenames)
+        return 0
+    if (addToRepo(os.getcwd(), filenames)):
+        print("Copied from source location to current directory, and added to git repo.")
+    else:
+        print("Failed to copy from source location, and add to git repo.")
+        return 0
     call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
     call(["git", "push", "-u", "--quiet", "origin", "master"])
     print("Synced with remote repository")
-    return
+    return 1
 
 if __name__ == '__main__':
     main()
