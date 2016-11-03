@@ -36,7 +36,8 @@ def main():
     			"$HOME/.bashrc", 
     			"$HOME/scripts",
                         "$HOME/misc-fixes"]
-    filenames = os.path.expandvars(filenames)
+    filenames = [os.path.expandvars(tempFile) for tempFile in filenames] 
+    print(filenames)
     if cleanUp(os.getcwd(), filenames):
         print("Cleaned up!")
     else:
