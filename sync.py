@@ -29,14 +29,14 @@ def cleanUp(directory, filenames):
     return 1
 
 def main():
-    filenames = ["$HOME/.zshrc", 
-   			"$HOME/zshfiles",
-    			"$HOME/.vimrc", 
-                        "$HOME/vimfiles",
-    			"$HOME/.bashrc", 
-    			"$HOME/scripts",
-                        "$HOME/misc-fixes"]
-    filenames = [os.path.expandvars(tempFile) for tempFile in filenames] 
+    filenames = ["$HOME/.zshrc",
+            "$HOME/zshfiles",
+            "$HOME/.vimrc",
+            "$HOME/vimfiles",
+            "$HOME/.bashrc",
+            "$HOME/scripts",
+            "$HOME/misc-fixes"]
+    filenames = [os.path.expandvars(tempFile) for tempFile in filenames]
     if cleanUp(os.getcwd(), filenames):
         print("Cleaned up!")
     else:
