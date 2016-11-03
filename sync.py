@@ -12,7 +12,8 @@ def addToRepo(directory, filenames):
     currDir = os.getcwd()
     os.chdir(directory)
     for tempFile in filenames:
-        call(["cp", "-Rv", tempFile, directory])
+        # call(["cp", "-Rv", tempFile, directory])
+        call(["cp", "-R", tempFile, directory])
         toBeAdded = tempFile.split('/')[-1]
         call(["git", "add", directory + "/" + toBeAdded])
     return 1
