@@ -9,3 +9,7 @@ source $HOME/vimfiles/startup.vim
 source $HOME/vimfiles/colorscheme.vim
 source $HOME/vimfiles/map.vim
 source $HOME/vimfiles/gvim.vim
+
+if has("win32")
+    source ~/vimfiles/vimrcfiles/conemu.vim
+endif
