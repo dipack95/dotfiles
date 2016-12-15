@@ -1,11 +1,10 @@
 "
 " ConEmu.vim
-" General fixes and other things to make Vim 
+" General fixes and other things to make Vim
 " play nice with Windows and ConEmu
 "
 
 if !empty($CONEMUBUILD)
-    
     " Fix to properly display symbols in ConEmu
     " on Windows
     set termencoding=utf8
