@@ -2,6 +2,7 @@
 import sys
 import os
 import time
+import shutil
 from subprocess import call
 # Check if running with python 3 or newer
 if sys.version_info[0] != 3:
@@ -23,9 +24,10 @@ def cleanUp(directory, filenames):
     os.chdir(directory)
     for tempFile in filenames:
         toBeDeleted = tempFile.split('/')[-1]
-        if call(["rm", "-rf", toBeDeleted]):
-            os.chdir(currDir)
-            return 0
+        if(os.path.isfile(toBeDeleted) and os.path.exists(toBeDeleted)):
+            os.remove(toBeDeleted)
+        elif(os.path.isdir(toBeDeleted) and os.path.exists(toBeDeleted)):
+            shutil.rmtree(toBeDeleted)
     os.chdir(currDir)
     return 1
 
