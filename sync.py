@@ -53,13 +53,9 @@ def main():
     else:
         print("Failed to copy from source location, and add to git repo.")
         return 0
-    print(call(["git", "status", "--porcelain"]))
-    if(call(["git", "status", "--porcelain"])):
-        call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
-        call(["git", "push", "-u", "--quiet", "origin", "master"])
-        print("Synced with remote repository")
-    else:
-        print("Nothing to commit!")
+    call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
+    call(["git", "push", "-u", "--quiet", "origin", "master"])
+    print("Synced with remote repository")
     return 1
 
 if __name__ == '__main__':
