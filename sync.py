@@ -17,9 +17,9 @@ def addToRepo(directory, filenames):
         toBeAdded = tempFile.split('/')[-1]
         if(toBeAdded[0] == '.'):
             toBeAdded = toBeAdded[1:]
-            call(["cp", "-R", tempFile, directory + "/" + toBeAdded, "2>", "/dev/null"])
+            call(["cp", "-R", tempFile, directory + "/" + toBeAdded, "2>/dev/null"])
         else:
-            call(["cp", "-R", tempFile, directory, "2>", "/dev/null"])
+            call(["cp", "-R", tempFile, directory, "2>/dev/null"])
         call(["git", "add", toBeAdded])
     return 1 
 def cleanUp(directory, filenames):
