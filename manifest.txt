@@ -1,0 +1,10 @@
+#
+# This is a manifest file which contains the list of all the files to be committed by my sync.py file
+#
+$HOME/.zshrc
+$HOME/zshfiles
+$HOME/.vimrc
+$HOME/vimfiles
+$HOME/.bashrc
+$HOME/scripts
+$HOME/misc-fixes
