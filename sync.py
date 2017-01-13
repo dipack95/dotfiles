@@ -37,7 +37,7 @@ def cleanUp(directory, filenames):
 
 def main():
     filenames = []
-    manifestFile = sys.argv[1] if sys.argv[1] else './manifest.txt'
+    manifestFile = sys.argv[1] if len(sys.argv) >= 2 else './manifest.txt'
     if not os.path.isfile(manifestFile):
         print("Manifest file {} does not exist!".format(manifestFile))
         return 1
