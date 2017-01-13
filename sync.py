@@ -22,8 +22,7 @@ def addToRepo(directory, filenames, repo):
         else:
             call(["cp", "-R", tempFile, directory])
         repo.git.add(toBeAdded)
-    return 1
-
+    return 1 
 def cleanUp(directory, filenames):
     currDir = os.getcwd()
     os.chdir(directory)
@@ -59,7 +58,8 @@ def main():
     # call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
     # call(["git", "push", "-u", "--quiet", "origin", "master"])
     if(dotfilesRepo.is_dirty()):
-        dotfilesRepo.git.commit(m = time.strftime("%c"))
+        call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
+        #dotfilesRepo.git.commit(m = time.strftime("%c"))
         dotfilesRepo.git.push()
         print("Synced with remote repository")
     else:
