@@ -24,9 +24,9 @@ def cleanUp(directory, filenames):
     os.chdir(directory)
     for tempFile in filenames:
         toBeDeleted = tempFile.split('/')[-1]
-        if(os.path.isfile(toBeDeleted) and os.path.exists(toBeDeleted)):
+        if(os.path.isfile(toBeDeleted) and os.path.exists(toBeDeleted) and os.path.exists(tempFile)):
             os.remove(toBeDeleted)
-        elif(os.path.isdir(toBeDeleted) and os.path.exists(toBeDeleted)):
+        elif(os.path.isdir(toBeDeleted) and os.path.exists(toBeDeleted) and os.path.exists(tempFile)):
             shutil.rmtree(toBeDeleted)
     os.chdir(currDir)
     return 1
