@@ -55,7 +55,9 @@ def main():
     if cleanUp(os.getcwd(), filenames):
         print("Cleaned up current directory.")
     else:
-        print("Failed to clean up current directory.") sys.exit(1) # The files are then added/staged in the git repo
+        print("Failed to clean up current directory.")
+        sys.exit(1)
+    # The files are then added/staged in the git repo
     if (addToRepo(os.getcwd(), filenames)):
         print("Copied from source location to current directory, and added to git repo.")
     else:
