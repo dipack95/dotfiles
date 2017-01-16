@@ -41,7 +41,7 @@ def main():
     manifestFile = sys.argv[1] if len(sys.argv) >= 2 else './manifest.txt'
     if not os.path.isfile(manifestFile):
         print("Manifest file {} does not exist!".format(manifestFile))
-        return 1
+        sys.exit(1)
     # Here, we check if the line read from the manifest is a comment or an actual filename
     # Comments start with an '#'
     commentRegex = re.compile("^\#.*\s$")
@@ -55,19 +55,17 @@ def main():
     if cleanUp(os.getcwd(), filenames):
         print("Cleaned up current directory.")
     else:
-        print("Failed to clean up current directory.")
-        return 0
-    # The files are then added/staged in the git repo
+        print("Failed to clean up current directory.") sys.exit(1) # The files are then added/staged in the git repo
     if (addToRepo(os.getcwd(), filenames)):
         print("Copied from source location to current directory, and added to git repo.")
     else:
         print("Failed to copy from source location, and add to git repo.")
-        return 0
+        sys.exit(1)
     # Simple git commit, and push combo
     call(["git", "commit", "-am", "\'" + time.strftime("%c") + "\'"])
     call(["git", "push", "-u", "--quiet", "origin", "master"])
     print("Synced with remote repository")
-    return 1
+    sys.exit(0)
 
 if __name__ == '__main__':
     main()
