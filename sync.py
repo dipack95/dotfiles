@@ -45,7 +45,7 @@ def main():
     # Here, we check if the line read from the manifest is a comment or an actual filename
     # Comments start with an '#'
     commentRegex = re.compile("^\#.*\s$")
-    with open('./manifest.txt') as manifest:
+    with open(manifestFile) as manifest:
         for line in manifest:
             if not commentRegex.match(line):
                 filenames.append(line.rstrip('\n'))
