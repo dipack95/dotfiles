@@ -19,6 +19,7 @@ git clone https://github.com/vim/vim.git vim-git
 cd ./vim-git
 
 VIM_PYTHON3_SETUP="$(python3-config --configdir)"
+VIM_VERSION="$(head -1 README.txt | sed -r 's/[^0-9]//g')"
 echo "Python 3 Config directory is: " $VIM_PYTHON3_SETUP
 
 ./configure --with-features=huge --enable-multibyte --enable-rubyinterp --enable-python3interp --with-python3-config-dir=$VIM_PYTHON3_SETUP --enable-perlinterp --enable-luainterp --enable-gui=gtk2 --enable-cscope --prefix=/usr
@@ -26,7 +27,7 @@ echo "Python 3 Config directory is: " $VIM_PYTHON3_SETUP
 make VIMRUNTIMEDIR=/usr/share/vim/vim80
 
 echo "Using checkinstall to build and install custom VIM"
-sudo checkinstall --pkgname=vim-py3 --pkgversion=$(head -1 README.txt | sed -r 's/[^0-9]//g')-git --provides=vim
+sudo checkinstall --pkgname=vim-py3 --pkgversion=$VIM_VERSION-git --provides=vim
 
 unset $VIM_PYTHON3_SETUP
 
