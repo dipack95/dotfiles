@@ -91,3 +91,7 @@ function extract() {
         echo "'$1' is not a valid file!"
     fi
 }
+
+function tenmm() {
+	curl --silent https://temp-mail.org/en/ | grep 'class\=\"mail\ opentip\"' | sed -e 's|^.*value\=\"||' -e 's|\".*$||'
+}
