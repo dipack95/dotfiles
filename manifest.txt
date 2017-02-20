@@ -8,3 +8,4 @@ $HOME/vimfiles
 $HOME/.bashrc
 $HOME/scripts
 $HOME/misc-fixes
+$HOME/.tmux.conf
