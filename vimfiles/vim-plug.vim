@@ -11,5 +11,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
+Plug 'mkitt/tabline.vim'
 
 call plug#end()
