@@ -26,7 +26,5 @@ source $ZSH_CONF_HOME/completions.zsh
 source $ZSH_CONF_HOME/functions.zsh
 source $ZSH_CONF_HOME/aliases.zsh
 
-export LESS='-RMi'
-
 systemctl --user import-environment PATH
 # End of User Files

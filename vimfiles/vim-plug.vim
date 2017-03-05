@@ -12,5 +12,6 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
 Plug 'mkitt/tabline.vim'
+Plug 'godlygeek/tabular'
 
 call plug#end()
