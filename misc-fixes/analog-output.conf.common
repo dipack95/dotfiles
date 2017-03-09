@@ -1,5 +1,5 @@
 # Fix: Used to make Pulseaudio/GUI Vol. Cntrl Keys control the PCM volume,
-#       instead of the Master volume, which does not actually control the 
+#       instead of the Master volume, which does not actually control the
 #       volume.
 # Location: /usr/share/pulseaudio/alsa-mixer/paths/analog-output.conf.common
 
