@@ -93,13 +93,13 @@ function extract() {
 }
 
 function scan_localnet() {
-    echo "Scanning local network for all hosts"
-    echo "Requesting superuser access"
     local interface
     if [ -n "$1" ] ; then
         interface="$1"
     else
         interface="wlan0"
     fi
+    echo "Scanning local network for all hosts"
+    echo "Requesting superuser access"
     sudo arp-scan --interface "$interface" --localnet
 }
