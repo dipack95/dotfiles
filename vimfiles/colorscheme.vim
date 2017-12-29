@@ -4,7 +4,7 @@
 
 " Setting terminal colors to 256
 " set t_Co=256
-colorscheme badwolf 
+colorscheme badwolf
 
 " Vim-Airline config
 let g:airline_theme='badwolf'
