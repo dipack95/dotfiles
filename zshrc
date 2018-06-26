@@ -1,6 +1,6 @@
 if [[ `id -u` -eq 0 ]]; then
     RED='\033[0;31m'
-    NC='\033[0m' # No Color   
+    NC='\033[0m' # No Color
     echo "**********************************************"
     echo -e "${RED}You are now loading ZSH as root!${NC}"
     echo -e "${RED}PLEASE BE CAREFUL${NC}"
