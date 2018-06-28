@@ -33,6 +33,9 @@ while inotifywait --recursive --event modify,create,delete $source; do
     # --info=progress2  : Provides a progress log to show you what is happening
     # The trailing slash at the end of `$source` is important, as it prevents a folder with the $source's name from being created on the $target
     rsync --archive --update --delete --one-file-system --no-prune-empty-dirs --info=progress2 --exclude=".*" --exclude="Skydiving" --exclude=".dropbox" --exclude="~*" $source/ $target;
+
+    # RClone has a nice little known bug; it does not sync empty directories from the $source to the $target
+    # Only workaround is to create some non-empty files in the directories, to get them to sync
     if rclone sync --stats=10s --stats-log-level=NOTICE $target remote:Dropbox_Mirror; then
         echo
         echo "Completed RClone sync to remote:Dropbox_Mirror";
