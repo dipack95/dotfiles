@@ -32,7 +32,7 @@ while inotifywait --recursive --event modify,create,delete $source; do
     # --one-file-system : Prevent moving across different FS types, i.e. if an NTFS partition is mounted at the $source, and the current FS is Ext4, do not look at the NTFS partition
     # --info=progress2  : Provides a progress log to show you what is happening
     # The trailing slash at the end of `$source` is important, as it prevents a folder with the $source's name from being created on the $target
-    rsync --archive --update --delete --one-file-system --info=progress2 --exclude=".*" --exclude="Skydiving" --exclude=".dropbox" --exclude="~*" $source/ $target;
+    rsync --archive --update --delete --one-file-system --no-prune-empty-dirs --info=progress2 --exclude=".*" --exclude="Skydiving" --exclude=".dropbox" --exclude="~*" $source/ $target;
     if rclone sync --stats=10s --stats-log-level=NOTICE $target remote:Dropbox_Mirror; then
         echo
         echo "Completed RClone sync to remote:Dropbox_Mirror";
