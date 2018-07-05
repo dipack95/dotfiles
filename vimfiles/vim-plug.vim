@@ -15,5 +15,6 @@ Plug 'flazz/vim-colorschemes'
 Plug 'mkitt/tabline.vim'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
