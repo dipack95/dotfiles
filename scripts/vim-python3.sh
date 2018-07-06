@@ -24,7 +24,7 @@ echo "Python 3 Config directory is: " $VIM_PYTHON3_SETUP
 
 ./configure --with-features=huge --enable-multibyte --enable-rubyinterp --enable-python3interp --with-python3-config-dir=$VIM_PYTHON3_SETUP --enable-perlinterp --enable-luainterp --enable-gui=gtk2 --enable-cscope --prefix=/usr
 
-make VIMRUNTIMEDIR=/usr/share/vim/vim80
+make VIMRUNTIMEDIR="/usr/share/vim/vim$VIM_VERSION"
 
 echo "Using checkinstall to build and install custom VIM"
 sudo checkinstall --pkgname=vim-py3 --pkgversion=$VIM_VERSION-git --provides=vim
