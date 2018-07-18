@@ -1,0 +1,8 @@
+As of 18/07/2018:
+===================================================================
+1. Use PlayOnLinux
+2. Add the i386 architecture to the package manager
+3. Setup `bumblebee` according to your distro's needs
+4. These are the libs to install, AFAIK - [ primus-libs{,:i386} ]
+5. Setup as you would regular installs on Windows
+6. Start PlayOnLinux using `optirun` as this the best I've found to run the apps using the discrete GPU
