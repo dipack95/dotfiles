@@ -1,34 +1,45 @@
 #!/bin/bash
-echo "Getting prerequisites for this build..."
+echo "Getting prerequisites for this build...";
 
-sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
-    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
-    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
-    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
+sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev  libgtk2.0-dev libatk1.0-dev libbonoboui2-dev  libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev  python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git;
 
-echo "Starting VIM Python 3 build"
+echo "Starting VIM Python 3 build";
 
-if [ ! -d ./vim-build/ ]; then
-    mkdir -p ./vim-build
-fi
+function setup_build_dir {
+    if [ ! -d ./vim-build/ ]; then
+        mkdir -p ./vim-build;
+    fi
+    cd ./vim-build;
+}
 
-cd ./vim-build
+function clone_vim_git_repo {
+    echo "Cloning VIM Git repo";
+    git clone https://github.com/vim/vim.git vim-git;
+    cd ./vim-git;
+}
 
-echo "Cloning VIM git repository"
-git clone https://github.com/vim/vim.git vim-git
-cd ./vim-git
+function configure_vim {
+    VIM_PYTHON3_SETUP="$(python3-config --configdir)";
+    VIM_VERSION="$(head -1 README.txt | sed -r 's/[^0-9]//g')";
+    echo "Python 3 Config directory is: " $VIM_PYTHON3_SETUP;
 
-VIM_PYTHON3_SETUP="$(python3-config --configdir)"
-VIM_VERSION="$(head -1 README.txt | sed -r 's/[^0-9]//g')"
-echo "Python 3 Config directory is: " $VIM_PYTHON3_SETUP
+    ./configure --with-features=huge --enable-multibyte --enable-rubyinterp --enable-python3interp --with-python3-config-dir=$VIM_PYTHON3_SETUP --enable-perlinterp --enable-luainterp --enable-gui=gtk2 --enable-cscope --prefix=/usr;
 
-./configure --with-features=huge --enable-multibyte --enable-rubyinterp --enable-python3interp --with-python3-config-dir=$VIM_PYTHON3_SETUP --enable-perlinterp --enable-luainterp --enable-gui=gtk2 --enable-cscope --prefix=/usr
+    make VIMRUNTIMEDIR="/usr/share/vim/vim$VIM_VERSION";
+    echo "Using checkinstall to build and install custom VIM";
+    sudo checkinstall --pkgname=vim-py3 --pkgversion=$VIM_VERSION-git --provides=vim;
+    unset $VIM_PYTHON3_SETUP;
+}
 
-make VIMRUNTIMEDIR="/usr/share/vim/vim$VIM_VERSION"
+function finish {
+    if [ -d ./vim-build/ ]; then
+        rm -rf ./vim-build/;
+    fi
+    echo "Done!";
+}
 
-echo "Using checkinstall to build and install custom VIM"
-sudo checkinstall --pkgname=vim-py3 --pkgversion=$VIM_VERSION-git --provides=vim
+trap finish EXIT;
 
-unset $VIM_PYTHON3_SETUP
-
-echo "Done!"
+setup_build_dir
+clone_vim_git_repo
+configure_vim

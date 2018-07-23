@@ -11,7 +11,7 @@ if sys.version_info[0] != 3:
         print("This script requires Python version 3.x")
         sys.exit(1)
 
-def addToRepo(directory, filenames):
+def add_to_repository(directory, filenames):
     currDir = os.getcwd()
     os.chdir(directory)
     for tempFile in filenames:
@@ -24,7 +24,7 @@ def addToRepo(directory, filenames):
         call(["git", "add", toBeAdded])
     return 1
 
-def cleanUp(directory, filenames):
+def clean_up_directory(directory, filenames):
     currDir = os.getcwd()
     os.chdir(directory)
     for tempFile in filenames:
@@ -52,13 +52,13 @@ def main():
     # All the environment variable in the file paths are expanded
     filenames = [os.path.expandvars(tempFile) for tempFile in filenames]
     # The git directory is completely cleaned up to avoid any conflicts while copying/committing.
-    if cleanUp(os.getcwd(), filenames):
+    if clean_up_directory(os.getcwd(), filenames):
         print("Cleaned up current directory.")
     else:
         print("Failed to clean up current directory.")
         sys.exit(1)
     # The files are then added/staged in the git repo
-    if (addToRepo(os.getcwd(), filenames)):
+    if (add_to_repository(os.getcwd(), filenames)):
         print("Copied from source location to current directory, and added to git repo.")
     else:
         print("Failed to copy from source location, and add to git repo.")
