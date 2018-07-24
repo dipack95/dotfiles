@@ -1,9 +1,15 @@
-#!/bin/bash
-echo "Getting prerequisites for this build...";
+#!/usr/bin/env bash
 
-sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev  libgtk2.0-dev libatk1.0-dev libbonoboui2-dev  libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev  python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git;
+function install_dependencies {
+    echo "Getting prerequisites for this build...";
+    CMD=$CMD;
+    if command -v apt-get; then
+        echo "Debian/Ubuntu based system";
+        CMD="apt-get install";
+    fi
+    sudo "$CMD" libncurses5-dev libgnome2-dev libgnomeui-dev  libgtk2.0-dev libatk1.0-dev libbonoboui2-dev  libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev  python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git;
+}
 
-echo "Starting VIM Python 3 build";
 
 function setup_build_dir {
     if [ ! -d ./vim-build/ ]; then
@@ -40,6 +46,8 @@ function finish {
 
 trap finish EXIT;
 
-setup_build_dir
-clone_vim_git_repo
-configure_vim
+echo "Starting VIM Python 3 build";
+install_dependencies;
+setup_build_dir;
+clone_vim_git_repo;
+configure_vim;
