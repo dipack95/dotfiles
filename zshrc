@@ -24,15 +24,20 @@ ENABLE_CORRECTION="true"
 plugins=(git-no-alias)
 
 # User configuration
+export ZSH_CONF_HOME=$HOME/zshfiles
 
 # User Files
-
-source $HOME/zshfiles/env.zsh
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
-source $ZSH_CONF_HOME/keybind.zsh
-source $ZSH_CONF_HOME/completions.zsh
-source $ZSH_CONF_HOME/functions.zsh
-source $ZSH_CONF_HOME/aliases.zsh
+for config_file in $ZSH_CONF_HOME/*.zsh
+do
+    # source $ZSH_CONF_HOME/zshfiles/env.zsh
+    # source $ZSH_CONF_HOME/keybind.zsh
+    # source $ZSH_CONF_HOME/completions.zsh
+    # source $ZSH_CONF_HOME/functions.zsh
+    # source $ZSH_CONF_HOME/aliases.zsh
+    source $config_file;
+done
 
 systemctl --user import-environment PATH
 # End of User Files
+
