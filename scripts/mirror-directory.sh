@@ -3,31 +3,52 @@
 #
 # Author      : Dipack P Panjabi
 # Description : This script is used to watch and mirror a directory to another.
+#               It can also be used to do a quick, one-time sync of data from my Dropbox to my Google Drive
 #               I use it to mirror my dropbox data to my Google Drive
 #
 
 source="$1";
 target="$2";
+mode="$3";
 
-if rclone -v lsf remote:Dropbox_Mirror; then
-    echo "RClone connection to Dropbox_Mirror is working as expected";
-else
-    echo "RClone connection to Dropbox_Mirror is not working!";
-    exit 255;
-fi
+function main {
+    if [ "$#" -ne 2 ] && [ "$#" -ne 3 ]; then
+        print_usage;
+        exit 1;
+    fi
 
-if [ -z "$source" ] || [ -z "$target" ]; then
-    echo "Source or target not set.";
-    echo "Source: $source";
-    echo "Target: $target";
-    exit 255;
-fi
+    if rclone -v lsf remote:Dropbox_Mirror &> /dev/null ; then
+        echo "RClone connection to Dropbox_Mirror is working as expected";
+    else
+        echo "RClone connection to Dropbox_Mirror is not working!";
+        exit 255;
+    fi
 
-echo
-echo "Mirroring $source to $target";
-echo
+    echo
+    echo "Mirroring $source to $target";
+    echo
 
-while inotifywait --recursive --event modify,create,delete $source; do
+    if [ "$mode" = "one" ]; then
+        echo "===========================================";
+        echo "Mode: One off sync";
+        echo "===========================================";
+        sync_to_google_drive;
+    elif [ -z "$mode" ]; then
+        echo "===========================================";
+        echo "Mode: Watch and sync";
+        echo "===========================================";
+        watch_and_sync;
+    fi
+}
+
+function print_usage {
+    echo "This function requires 2-3 arguments";
+    echo "Usage: $0 <source> <target> [ <mode> = { 'one' } ]";
+    echo "      <mode> == 'one' -> Does a one-time sync of data from <source> to <target>";
+    echo "      <mode> == Empty -> Watches and syncs data from <source> to <target>";
+}
+
+function sync_to_google_drive {
     # --archive         : Basically copies the files and subdirs in archive mode, i.e. preserving perms, etc.
     # --one-file-system : Prevent moving across different FS types, i.e. if an NTFS partition is mounted at the $source, and the current FS is Ext4, do not look at the NTFS partition
     # --info=progress2  : Provides a progress log to show you what is happening
@@ -41,4 +62,12 @@ while inotifywait --recursive --event modify,create,delete $source; do
         echo "Completed RClone sync to remote:Dropbox_Mirror";
         echo
     fi
-done
+}
+
+function watch_and_sync {
+    while inotifywait --recursive --event modify,create,delete $source; do
+        sync_to_google_drive;
+    done
+}
+
+main;
