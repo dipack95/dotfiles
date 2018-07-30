@@ -10,7 +10,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export SSH_ASKPASS="/usr/bin/ksshaskpass"
 export LESS='-RMi'
 export EXT_IP="$(curl -s http://ipv6-test.com/api/myip.php)"
-export NPM_PACKAGES=$HOME/.npm-global
+export NPM_PACKAGES="$HOME/.npm-global/bin"
 export USER_BIN_DIR="$HOME/bin"
 export PATH="$USER_BIN_DIR:$NPM_PACKAGES:$PATH"
 
