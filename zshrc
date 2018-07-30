@@ -1,3 +1,4 @@
+# Display a banner when logging in as root
 if [[ `id -u` -eq 0 ]]; then
     RED='\033[0;31m'
     NC='\033[0m' # No Color
@@ -6,6 +7,7 @@ if [[ `id -u` -eq 0 ]]; then
     echo -e "${RED}PLEASE BE CAREFUL${NC}"
     echo "**********************************************"
 fi
+
 # Oh My Zsh Configuration
 
 # Set name of the theme to load.
@@ -24,10 +26,12 @@ ENABLE_CORRECTION="true"
 plugins=(git-no-alias)
 
 # User configuration
+export ZSH=$HOME/.oh-my-zsh
 export ZSH_CONF_HOME=$HOME/zshfiles
 
 # User Files
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
+
 for config_file in $ZSH_CONF_HOME/*.zsh
 do
     # source $ZSH_CONF_HOME/zshfiles/env.zsh
@@ -40,4 +44,3 @@ done
 
 systemctl --user import-environment PATH
 # End of User Files
-
