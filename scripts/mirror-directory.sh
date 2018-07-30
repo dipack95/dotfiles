@@ -12,11 +12,15 @@ target="$2";
 mode="$3";
 
 function main {
-    if [ "$#" -ne 2 ] && [ "$#" -ne 3 ]; then
+    if [ -z $source ] || [ -z $target ]; then
+        print_usage;
+        exit 1;
+    elif [ "$mode" != "one" ] && [ "$mode" != "" ]; then
         print_usage;
         exit 1;
     fi
 
+    echo "Testing RClone connection to Google Drive";
     if rclone -v lsf remote:Dropbox_Mirror &> /dev/null ; then
         echo "RClone connection to Dropbox_Mirror is working as expected";
     else
