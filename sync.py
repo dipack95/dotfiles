@@ -57,7 +57,6 @@ def main():
     manifest_file = expand_path(options.filename)
     repo_dir= expand_path(options.repoDirectory)
     push_to_remote_flag = options.pushToRemote
-    print(options, args, manifest_file, repo_dir)
     if not os.path.isfile(manifest_file):
         print("Manifest file {} does not exist!".format(manifest_file))
         sys.exit(1)
