@@ -41,6 +41,7 @@ def setup_options():
     parser.add_option("-f", "--file", action="store", dest="filename", help="Manifest file to use to sync files with the repo", default="./manifest.txt")
     parser.add_option("-r", "--repo-directory", action="store", dest="repoDirectory", help="Git repo directory", default="$HOME/dotfiles")
     parser.add_option("-p", "--push-to-remote", action="store_true", dest="pushToRemote", help="Push to remote directory, defaults to true", default=True)
+    parser.add_option("-n", "--no-push-to-remote", action="store_false", dest="pushToRemote", help="Do not push to remote directory")
     return parser
 
 def expand_path(path):
