@@ -40,27 +40,34 @@ def setup_options():
     parser = OptionParser()
     parser.add_option("-f", "--file", action="store", dest="filename", help="Manifest file to use to sync files with the repo", default="./manifest.txt")
     parser.add_option("-r", "--repo-directory", action="store", dest="repoDirectory", help="Git repo directory", default="$HOME/dotfiles")
+    parser.add_option("-p", "--push-to-remote", action="store_true", dest="pushToRemote", help="Push to remote directory, defaults to true", default=True)
     return parser
 
 def expand_path(path):
     return os.path.realpath(os.path.expandvars(path))
 
+def push_to_remote():
+    call(["git", "push", "-u", "--quiet", "origin", "master"])
+    print("Synced with remote repository")
+    return 1
+
 def main():
     (options, args) = setup_options().parse_args(sys.argv[1:])
     manifest_file = expand_path(options.filename)
     repo_dir= expand_path(options.repoDirectory)
+    push_to_remote_flag = options.pushToRemote
     print(options, args, manifest_file, repo_dir)
     if not os.path.isfile(manifest_file):
         print("Manifest file {} does not exist!".format(manifest_file))
         sys.exit(1)
     # Here, we check if the line read from the manifest is a comment or an actual filename
     # Comments start with an '#'
-    commentRegex = re.compile("^\#.*\s$")
+    comment_regex = re.compile("^\#.*\s$")
     # This section picks up the file names from the provided manifest file.
     files_to_commit = []
     with open(manifest_file) as manifest:
         for line in manifest:
-            if not commentRegex.match(line):
+            if not comment_regex.match(line):
                 files_to_commit.append(line.rstrip('\n'))
     # All the environment variable in the file paths are expanded
     files_to_commit = [expand_path(tempFile) for tempFile in files_to_commit]
@@ -76,10 +83,9 @@ def main():
     else:
         print("Failed to copy from source location, and add to git repo.")
         sys.exit(1)
-    # Simple git commit, and push combo
-    print("Pushing to remote repo")
-    call(["git", "push", "-u", "--quiet", "origin", "master"])
-    print("Synced with remote repository")
+    if push_to_remote_flag:
+        print("Pushing to remote repo")
+        push_to_remote()
     sys.exit(0)
 
 if __name__ == '__main__':
