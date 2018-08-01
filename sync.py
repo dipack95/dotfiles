@@ -36,14 +36,6 @@ def clean_up_directory(directory, filenames):
         elif(os.path.isdir(toBeDeleted) and os.path.exists(toBeDeleted) and os.path.exists(tempFile)): shutil.rmtree(toBeDeleted)
     return 1
 
-def setup_options():
-    parser = OptionParser()
-    parser.add_option("-f", "--file", action="store", dest="filename", help="Manifest file to use to sync files with the repo", default="./manifest.txt")
-    parser.add_option("-r", "--repo-directory", action="store", dest="repoDirectory", help="Git repo directory", default="$HOME/dotfiles")
-    parser.add_option("-p", "--push-to-remote", action="store_true", dest="pushToRemote", help="Push to remote directory, defaults to true", default=True)
-    parser.add_option("-n", "--no-push-to-remote", action="store_false", dest="pushToRemote", help="Do not push to remote directory")
-    return parser
-
 def expand_path(path):
     return os.path.realpath(os.path.expandvars(path))
 
@@ -51,6 +43,14 @@ def push_to_remote():
     call(["git", "push", "-u", "--quiet", "origin", "master"])
     print("Synced with remote repository")
     return 1
+
+def setup_options():
+    parser = OptionParser()
+    parser.add_option("-f", "--file", action="store", dest="filename", help="Manifest file to use to sync files with the repo", default="./manifest.txt")
+    parser.add_option("-r", "--repo-directory", action="store", dest="repoDirectory", help="Git repo directory", default="$HOME/dotfiles")
+    parser.add_option("-p", "--push-to-remote", action="store_true", dest="pushToRemote", help="Push to remote directory, defaults to true", default=True)
+    parser.add_option("-n", "--no-push-to-remote", action="store_false", dest="pushToRemote", help="Do not push to remote directory")
+    return parser
 
 def main():
     (options, args) = setup_options().parse_args(sys.argv[1:])
