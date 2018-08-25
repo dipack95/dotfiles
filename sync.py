@@ -52,6 +52,11 @@ def setup_options():
     parser.add_option("-n", "--no-push-to-remote", action="store_false", dest="pushToRemote", help="Do not push to remote directory")
     return parser
 
+def exit(code=1, show_message=True):
+    if show_message:
+        print("Exiting now!")
+    sys.exit(code)
+
 def main():
     (options, args) = setup_options().parse_args(sys.argv[1:])
     manifest_file = expand_path(options.filename)
@@ -59,7 +64,7 @@ def main():
     push_to_remote_flag = options.pushToRemote
     if not os.path.isfile(manifest_file):
         print("Manifest file {} does not exist!".format(manifest_file))
-        sys.exit(1)
+        exit()
     # Here, we check if the line read from the manifest is a comment or an actual filename
     # Comments start with an '#'
     comment_regex = re.compile("^\#.*\s$")
@@ -76,17 +81,17 @@ def main():
         print("Cleaned up current directory.")
     else:
         print("Failed to clean up current directory.")
-        sys.exit(1)
+        exit()
     # The files are then added/staged in the git repo
     if (add_to_repository(repo_dir, files_to_commit)):
         print("Copied from source location to current directory, and added to git repo.")
     else:
         print("Failed to copy from source location, and add to git repo.")
-        sys.exit(1)
+        exit()
     if push_to_remote_flag:
         print("Pushing to remote repo")
         push_to_remote()
-    sys.exit(0)
+    exit(0)
 
 if __name__ == '__main__':
     main()
