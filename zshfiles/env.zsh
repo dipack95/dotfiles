@@ -11,8 +11,9 @@ export SSH_ASKPASS="/usr/bin/ksshaskpass"
 export LESS='-RMi'
 export EXT_IP="$(curl -s http://v4.ipv6-test.com/api/myip.php)"
 export NPM_PACKAGES="$HOME/.npm-global/bin"
+export USER_LOCAL_BIN_DIR="$HOME/.local/bin"
 export USER_BIN_DIR="$HOME/bin"
-export PATH="$USER_BIN_DIR:$NPM_PACKAGES:$PATH"
+export PATH="$USER_BIN_DIR:$NPM_PACKAGES:$USER_LOCAL_BIN_DIR:$PATH"
 
 unset MANPATH
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
