@@ -80,20 +80,18 @@ function scan_localnet() {
 
 function activate_python_virtualenv() {
     local env_name="$1";
-    local venv_home="$HOME/py-venv/";
+    local venv_home="$HOME/py-venv";
     if [ ! -d "$venv_home" ]; then
-        echo "$venv_home does not exist!";
-        exit 255;
-    fi
-    if [ ! -d "$venv_home/$env_name" ] || [ ! -f "$venv_home/$env_name/bin/activate" ]; then
+        echo "Looking for python virtual environments in $venv_home, but it does not exist!";
+        return 255;
+    elif [ ! -d "$venv_home/$env_name" ] || [ ! -f "$venv_home/$env_name/bin/activate" ]; then
         echo "$venv_home/$env_name has not been setup correctly using 'virtualenv'!";
-        exit 255;
-    fi
-    if source "$venv_home/$env_name/bin/activate"; then
+        return 255;
+    elif source "$venv_home/$env_name/bin/activate"; then
         echo "Successfully activated $env_name python virtual env!";
         echo "Type 'deactivate' to exit the virtual environment!";
     else
         echo "Failed to activate $env_name!";
-        exit $?;
+        return $?;
     fi
 }
