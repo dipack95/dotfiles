@@ -86,7 +86,7 @@ function activate_python_virtualenv() {
         exit 255;
     fi
     if [ ! -d "$venv_home/$env_name" ] || [ ! -f "$venv_home/$env_name/bin/activate" ]; then
-        echo "$venv_home/$env_name has not been setup correctly using `virtualenv`!";
+        echo "$venv_home/$env_name has not been setup correctly using 'virtualenv'!";
         exit 255;
     fi
     if source "$venv_home/$env_name/bin/activate"; then
