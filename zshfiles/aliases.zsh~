@@ -5,5 +5,4 @@ alias pp3u="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip3 i
 alias rmrecent="rm $HOME/.local/share/recently-used.xbel; touch $HOME/.local/share/recently-used.xbel"
 alias spin-down="sudo shutdown now -h"
 alias spin-round="sudo shutdown now -r"
-alias apv="activate_python_virtualenv"
 # End of Aliases
