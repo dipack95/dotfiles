@@ -51,3 +51,7 @@ set ttimeoutlen=50
 
 " Load Global YCM Extra Conf
 let g:ycm_global_ycm_extra_conf = '$HOME/.ycm_extra_conf.py'
+
+set backupdir=~/.vim/tmp//,.
+set directory=~/.vim/tmp//,.
+
